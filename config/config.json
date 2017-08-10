@@ -1,0 +1,6 @@
+{
+  "database": "checkpoint_express_sequelize",
+  "host": "localhost",
+  "dialect": "postgres",
+  "logging": false
+}
