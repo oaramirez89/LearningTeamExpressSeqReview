@@ -47,7 +47,7 @@ describe('The `Episode` model', function () {
   });
 
   describe('attributes definition', function(){
-    xit('includes `title` and `synopsis` fields', function () {
+    it('includes `title` and `synopsis` fields', function () {
 
       return episode.save()
       .then(function (result) {
@@ -58,7 +58,7 @@ describe('The `Episode` model', function () {
 
     });
 
-    xit('requires `title`', function () {
+    it('requires `title`', function () {
 
       episode.title = null;
 
@@ -70,10 +70,9 @@ describe('The `Episode` model', function () {
         expect(err).to.be.an.instanceOf(Error);
         expect(err.message).to.contain('title cannot be null');
       });
-
     });
 
-    xit('can handle long `synopsis`', function() {
+    it('can handle long `synopsis`', function() {
 
       var longSynopsis = 'This is a sample synopsis. Generally, this is where I would summarize what happens in the episode without giving away too many spoilers. This paragraph is potentially very long, and by very long I mean over 255 characters. I hope that this gets correctly saved in my database. This is 300 characters.';
 
@@ -95,8 +94,9 @@ describe('The `Episode` model', function () {
   describe('options definition', function(){
 
     describe('`number` virtual field', function(){
-      xit('evaluates to the episode number, derived from the title', function () {
+      it('evaluates to the episode number, derived from the title', function () {
 
+        // episode.title = 'Episode 113: blah blha blah'
         expect(episode.number).to.equal('Episode 1');
 
         episode.title = 'Episode 3: Something exciting!';
@@ -105,7 +105,7 @@ describe('The `Episode` model', function () {
     });
 
     describe('`truncateSynopsis` instance method', function(){
-      xit('truncates the `synopsis`', function () {
+      it('truncates the `synopsis`', function () {
 
         expect(episode.synopsis).to.equal(shortText);
 
@@ -118,14 +118,6 @@ describe('The `Episode` model', function () {
     });
 
     describe('`findBySeason` class method', function(){
-
-      /**
-       * Set up a class method called `findByTitle` that's a convenience
-       * method to find a *single* document by its title.
-       *
-       * http://sequelize.readthedocs.io/en/v3/docs/models-definition/#expansion-of-models
-       */
-
       beforeEach(function(){
         var otherEpisodes = [2, 3, 4].map(function (num) {
           return Episode.create({
@@ -138,7 +130,7 @@ describe('The `Episode` model', function () {
         return Promise.all(episodes);
       });
 
-      xit('finds one specific article by its `title`', function () {
+      it('finds one specific article by its `title`', function () {
 
         return Episode.findBySeason(2)
         .then(function (foundEpisodes) {

@@ -46,7 +46,7 @@ describe('Episode Route:', function () {
      * 2.  Because there isn't anything in the DB, it should be an empty array
      */
 
-    xit('responds with an array via JSON', function () {
+    it('responds with an array via JSON', function () {
 
       return agent
       .get('/episodes')
@@ -66,7 +66,7 @@ describe('Episode Route:', function () {
      * using the GET /episodes route
      *
      */
-    xit('returns an episode if there is one in the DB', function () {
+    it('returns an episode if there is one in the DB', function () {
 
       var episode = Episode.build({
         title: 'Episode 1: Test Episode',
@@ -93,7 +93,7 @@ describe('Episode Route:', function () {
      * using the GET /episodes route
      *
      */
-    xit('returns another article if there is one in the DB', function () {
+    it('returns another article if there is one in the DB', function () {
 
       var episode1 = Episode.build({
         title: 'Test episode',
@@ -156,7 +156,7 @@ describe('Episode Route:', function () {
      * This is a proper GET /articles/ID request
      * where we search by the ID of the article created above
      */
-    xit('returns the JSON of the article based on the id', function () {
+    it('returns the JSON of the article based on the id', function () {
 
       return agent
       .get('/episodes/' + coolEpisode.id)
@@ -173,7 +173,7 @@ describe('Episode Route:', function () {
     /**
      * Here we pass in a bad ID to the URL, we should get a 404 error
      */
-    xit('returns a 404 error if the ID is not correct', function () {
+    it('returns a 404 error if the ID is not correct', function () {
 
       return agent
       .get('/episodes/76142896')
@@ -198,7 +198,7 @@ describe('Episode Route:', function () {
      *  }
      *
      */
-    xit('creates a new episode', function () {
+    it('creates a new episode', function () {
 
       return agent
       .post('/episodes')
