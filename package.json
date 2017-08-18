@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "start": "DEBUG=app nodemon ./bin/www",
-    "test": "nodemon --exec 'mocha --reporter spec --timeout 1000 test/*.test.js || true'",
+    "test": "mocha -w test/*.test.js",
     "grade": "mocha --reporter spec --timeout 1000 test/*.js",
     "db-init": "pg-init checkpoint_express_sequelize",
     "postinstall": "npm run db-init"

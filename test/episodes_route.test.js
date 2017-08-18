@@ -217,7 +217,7 @@ describe('Episode Route:', function () {
 
 
     // Check if the episodes were actually saved to the database
-    xit('saves the episode to the DB', function () {
+    it('saves the episode to the DB', function () {
 
       return agent
       .post('/episodes')
@@ -268,7 +268,7 @@ describe('Episode Route:', function () {
      *  }
      *
      **/
-    xit('updates an episode', function () {
+    it('updates an episode', function () {
 
       return agent
       .put('/episodes/' + episode.id)

@@ -13,34 +13,47 @@ const Episode = require('../models/episode');
  *
  */
 
-router.get('/episodes', function (req, res, next) {
+router.get('/episodes', function(req, res, next){
   Episode.findAll()
-  .then(function(arrayOfAllEpisodes) {  
-    res.send(arrayOfAllEpisodes);
-  });
-});
+  .then(function(episodes){
+    res.json(episodes);
+  })
+  .catch(next)
+})
 
-router.get('/episodes/:id', function (req, res, next) {
+router.get('/episodes/:id', function(req, res, next){
   Episode.findById(req.params.id)
-  .then(function(foundEpisode) {
-    if (!foundEpisode) {
-      res.sendStatus(404);
+  .then(function(episode){
+    if (episode === null){
+      res.status(404).send();
     } else {
-      res.json(foundEpisode);
+      res.json(episode);
     }
-  });
-});
+  })
+  .catch(next)
+})
 
-router.post('/episodes', function(req, res, next) {
-  // req.body = { title: ..., synopsis: ... }
+router.post('/episodes', function(req, res, next){
   Episode.create(req.body)
-  .then(function(createdEpisode) {
-    const customResponse = {
-      message: 'Created successfully',
-      episode: createdEpisode
-    };
-    res.status(200).send(customResponse)
-  });
-});
+  .then(function(episode){
+    res.send({message: "Created successfully", episode: episode});
+  })
+  .catch(next)
+})
+
+router.put('/episodes/:id', function(req, res, next){
+  Episode.findById(req.params.id)
+  .then(function(episode){
+    if (episode === null){
+      res.status(404).send();
+    } else {
+      episode.title = req.body.title;
+      res.json({message: 'Updated successfully' , episode: episode});
+    }
+  })
+  .catch(error=> {
+    res.status(500).send(error);
+  })
+})
 
 module.exports = router;

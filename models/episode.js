@@ -6,39 +6,33 @@ const TvShow = require('./tvshow');
 
 // Make sure you have `postgres` running!
 
-
 const Episode = db.define('episode', {
   title: {
     type: Sequelize.STRING,
     allowNull: false
   },
-  synopsis: {
-    type: Sequelize.TEXT
-  },
-  season: {
-    type: Sequelize.INTEGER
-  }
-}, {
-  getterMethods: {
-    number: function () {
-      return this.title.slice(0, this.title.indexOf(':'));
+  synopsis: Sequelize.TEXT,
+  season: Sequelize.INTEGER
+},{
+  /* options */
+  getterMethods:{
+    number(){
+      let thisTitle = this.getDataValue('title');
+      return thisTitle.slice(0, thisTitle.indexOf(':'));
     }
   }
-});
+})
 
-// const episodeInstance = Episode.build({synopsis: 'a synopsis that is long'});
-// episodeInstance.truncateSynopsis(10);
-Episode.prototype.truncateSynopsis = function (length) {
-  this.synopsis = this.synopsis.slice(0, length);
-};
+Episode.prototype.truncateSynopsis = function(length){
+ this.setDataValue('synopsis', this.getDataValue('synopsis').slice(0, length));
+}
 
-Episode.findBySeason = function (seasonNumber) {
+Episode.findBySeason = function(season){
   return Episode.findAll({
-    where: {
-      season: seasonNumber
+    where:{
+      season: season
     }
   })
-};
-
+}
 
 module.exports = Episode;

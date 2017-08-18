@@ -90,7 +90,6 @@ describe('The `Episode` model', function () {
 
   });
 
-
   describe('options definition', function(){
 
     describe('`number` virtual field', function(){
@@ -137,11 +136,7 @@ describe('The `Episode` model', function () {
           expect(foundEpisodes).to.be.an.instanceOf(Array);
           expect(foundEpisodes[0].season).to.equal(2);
         });
-
       });
-
     });
-
   });
-
 });

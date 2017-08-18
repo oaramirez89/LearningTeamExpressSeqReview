@@ -1,5 +1,6 @@
 {
   "database": "checkpoint_express_sequelize",
+  "password": "tra1n1ng",
   "host": "localhost",
   "dialect": "postgres",
   "logging": false
